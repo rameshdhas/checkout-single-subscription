@@ -44,6 +44,16 @@ app.get("/checkout-session", async (req, res) => {
   res.send(session);
 });
 
+app.get("/prices", async (req, res) => {
+
+    const prices = await stripe.prices.list({
+      limit: 3,
+    });
+
+    res.send(prices)
+
+});
+
 app.post("/create-checkout-session", async (req, res) => {
   const domainURL = process.env.DOMAIN;
   const { priceId } = req.body;
